@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+  .container{
+    display: inline-grid;
+    grid-template-columns:.1fr .1fr .1fr .1fr ;
+    grid-template-rows:.1fr .1fr .1fr .1fr;
+    grid-column-gap: 5px;
+    grid-row-gap:5px;
+   background-image:url("http://getwallpapers.com/wallpaper/full/4/5/4/397057.jpg") ;
+    grid-auto-rows: 100px;
+    align-content: center;
+   border:2px solid black;
+   box-shadow: 20px;
+  }
+ 
+.gri{
+  text-align:center;
+  padding:25px;
+  border:1px solid white ;
+  background-image: url("bgb.jpg");
+  color:white;
+  font-size:200%;
+
+}
+.bst
+{ type:button;
+  font-family: 'Dancing Script', cursive; 
+  background-image:url("http://getwallpapers.com/wallpaper/full/4/5/4/397057.jpg") ;/* Green */
+  border: 10PX SOLID BLACK;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+#record
+{
+  background-image:url("http://getwallpapers.com/wallpaper/full/4/5/4/397057.jpg")
+   color: black;
+   font-size: 200%;
+   font-family:cursive;
+   text-align:center;
+}
+body{
+  background-image:url("http://getwallpapers.com/wallpaper/full/4/5/4/397057.jpg");
+  
+    background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+    <h1 style="font-family: 'Dancing Script', cursive;text-align:center;">COUNTING GAME</h1>
+</head>
+</html>
+<body>
+
+  <button class="bst"> CLICK HERE TO START</button>
+  <p  class="timer"></p>
+   <div class="container">
+   </div>
+   <p id="record"></p>
+
+</body>
+</html>
+
+<script>
+   var elem=document.querySelector(".container");
+   var newdiv=[];
+   var r,c,u;
+   var start;
+   var end;
+   var arr=[];
+   var arr2=[];
+   var arr3=[];
+   var min;
+   var index;
+   var button;
+   var p;
+button=document.querySelector(".bst");
+
+
+  
+
+   function square(rows,columns)
+   { r=rows;
+    c=columns;
+    u=r*c;
+    for(var i=0;i<40;i++)
+    {
+      
+      arr[i]=i+1;
+    }
+    for(let i = arr.length-1; i > 0; i--)
+{
+  const j = Math.floor(Math.random() * i);
+  const temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+  
+}
+
+      for(var i=0;i<(rows*columns);i++)
+      {
+         
+           
+             newdiv[i]=document.createElement("div");
+             elem.appendChild(newdiv[i]);
+             newdiv[i].className="gri";
+             newdiv[i].textContent=arr[i];
+             arr2[i]=arr[i];
+             arr3[i]=arr[i];
+            
+           }
+      
+
+           min = Math.min.apply( Math,arr3 );
+           console.log(min);
+button.addEventListener("click",func);
+
+
+
+function func()
+{  
+  start= new Date();
+  for(var i=0;i<(rows*columns);i++)
+ {
+  newdiv[i].addEventListener("click",clickfunction);
+ }
+}
+
+
+ }
+    
+    function clickfunction(e)
+    {
+      
+      var celem = e.target;
+      if(celem.textContent==min)
+      { index=arr3.indexOf(min);
+        check();
+        
+        
+        function check()
+        {
+          var k=0;
+          var d=0;
+           function rand(element)
+        {
+          return element!=Random;
+        } 
+        
+       
+          let Random=Math.floor((Math.random()*40)+1);
+         for(var i=0;i<u;i++)
+          {if(arr3[i]>24)
+            d++;
+            
+
+          }
+          if(d==u)
+          {
+          celem.textContent=null;
+          arr3.splice(index,1);
+          u--;
+        }
+        else{
+          if(arr2.every(rand))
+        {
+          celem.textContent=Random;
+          arr3[index]=Random;
+          arr2.push(Random);
+          
+        }
+        else
+        {
+             check();      }     
+        }
+      }
+       
+          min = Math.min.apply( Math, arr3);
+          console.log(min);
+          if(arr3.length==0)
+          {
+            celem.style.display=null;
+            end= new Date();
+             endTime = new Date();
+            var timeDiff = endTime - start; //in ms
+  // strip the ms
+            timeDiff /= 1000;
+
+  // get seconds 
+           var seconds = Math.round(timeDiff);
+           var t=document.querySelector("#record");
+           t.textContent="Your Time is "+ seconds +"  seconds";
+           
+         }
+          }
+ 
+
+
+      
+      
+console.log(celem);
+    }
+
+    square(4,4);
+  </script>
+   
