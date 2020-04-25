@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+  .container{
+   
+   background-image:url("http://getwallpapers.com/wallpaper/full/4/5/4/397057.jpg") ;
+    align-content: center;
+
+
+  }
+ 
+.gri{
+  text-align:center;
+  
+  font-size:200%;
+
+}
+.ast{
+  
+}
+.dst
+{
+  font-family: 'Dancing Script', cursive; 
+  background-image:url("http://getwallpapers.com/wallpaper/full/4/5/4/397057.jpg") ;
+  border: 10PX solid black;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+
+}
+.sst
+{
+  font-family: 'Dancing Script', cursive; 
+  background-image:url("http://getwallpapers.com/wallpaper/full/4/5/4/397057.jpg") ;
+    border: 10PX solid black;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.score{
+  background-image:url("http://getwallpapers.com/wallpaper/full/4/5/4/397057.jpg")
+   color: black;
+   font-size: 200%;
+   font-family:cursive;
+
+}
+.s{
+   background-image:url("http://getwallpapers.com/wallpaper/full/4/5/4/397057.jpg")
+   color: black;
+   font-size: 200%;
+   font-family:cursive;
+
+}
+#record
+{
+  background-image:url("http://getwallpapers.com/wallpaper/full/4/5/4/397057.jpg")
+   color: black;
+   font-size: 200%;
+   font-family:cursive;
+   text-align:center;
+}
+#record1
+{background-image:url("http://getwallpapers.com/wallpaper/full/4/5/4/397057.jpg")
+   color: black;
+   font-size: 200%;
+   font-family:cursive;
+   text-align:center;
+}
+body{
+  background-image:url("http://getwallpapers.com/wallpaper/full/4/5/4/397057.jpg");
+  
+    background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+    <h1 style="font-family: 'Dancing Script', cursive;text-align:center;">COUNTING GAME</h1>
+</head>
+</html>
+<body>
+  <p style="font-family: 'Dancing Script',cursive;">CHOOSE THE DIFFICULTY OF THE GAME:</p>
+  <button class="dst">EASY</button>
+  <button  class="sst">HARD</button>
+    <br>
+    <br> 
+    <audio class="ast" ><source src="C:\Program Files\Sublime Text 3\ndn.mp3" type="audio/mpeg"></audio>
+  <button class="bst"> </button>
+  <p class="timer"></p>
+  <p class="score"></p>
+  <ul class="s"></ul>
+  
+   <div class="container">
+   </div>
+   <p id="record"></p>
+   <p id="record1"></p>
+
+</body>
+</html>
+
+<script>
+   var elem=document.querySelector(".container");
+   var newdiv=[];
+   var r,c,u;
+   var start;
+   var end,audio;
+   var arr=[];
+   var arr2=[];
+   var arr3=[];
+   var min;
+   var index;
+   var button;
+   var li=[];
+   var li2=[];
+   var p;
+   var ul=document.querySelector(".s");
+   var easy,hard;
+   var bestscore=new Array();
+button=document.querySelector(".bst");
+ easy=document.querySelector(".dst");
+ hard=document.querySelector(".sst");
+ easy.addEventListener("click",esquare);
+ hard.addEventListener("click",hsquare);
+ audio=document.querySelector(".ast")
+ var f=document.querySelector(".score");
+
+   function square(rows,columns)
+   { 
+    
+ elem.style.border="2px solid black";
+ elem.style.display="inline-grid";
+ elem.style.gridTemplateRows=".1fr .1fr .1fr .1fr";
+ elem.style.gridTemplateColumns=".1fr .1fr .1fr .1fr";
+
+    r=rows;
+    c=columns;
+    u=r*c;
+    for(var i=0;i<40;i++)
+    {
+      
+      arr[i]=i+1;
+    }
+    for(let i = arr.length-1; i > 0; i--)
+{
+  const j = Math.floor(Math.random() * i);
+  const temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+  
+}
+
+      for(var i=0;i<(rows*columns);i++)
+      {
+         
+           var k=8*i;
+             newdiv[i]=document.createElement("div");
+         newdiv[i].style.border="1px solid white";
+             newdiv[i].style.padding=" 25px";
+             newdiv[i].style.color="white";
+             newdiv[i].style.backgroundColor=" rgb("+ k +","+ k +","+ k+") ";
+             elem.appendChild(newdiv[i]);
+             newdiv[i].className="gri";
+             newdiv[i].textContent=arr[i];
+             arr2[i]=arr[i];
+             arr3[i]=arr[i];
+            
+           }
+      
+
+           min = Math.min.apply( Math,arr3 );
+           console.log(min);
+button.addEventListener("click",func);
+
+
+
+function func()
+{  
+  start= new Date();
+  for(var i=0;i<(rows*columns);i++)
+ {
+  newdiv[i].addEventListener("click",clickfunction);
+ }
+}
+
+
+ }
+    
+    function clickfunction(e)
+    {
+      
+      var celem = e.target;
+      if(celem.textContent==min)
+      { index=arr3.indexOf(min);
+        check();
+        
+        
+        function check()
+        {
+          var d=0;
+           function rand(element)
+        {
+          return element!=Random;
+        } 
+        
+       
+          let Random=Math.floor((Math.random()*40)+1);
+         for(var i=0;i<u;i++)
+
+          {if(r==4)
+            {
+
+            if(arr3[i]>24)
+            d++;
+        }
+        else
+        {
+           if(arr3[i]>20)
+            d++;
+        }
+            
+         }
+          if(d==u)
+          {
+          celem.textContent=null;
+          arr3.splice(index,1);
+          u--;
+        }
+        
+        else{
+          if(arr2.every(rand))
+        {
+          celem.textContent=Random;
+          arr3[index]=Random;
+          arr2.push(Random);
+          
+        }
+        else
+        {   
+             check();      }     
+        }
+      }
+
+
+      
+         var f=document.querySelector(".score");
+          min = Math.min.apply( Math, arr3);
+          console.log(min);
+          if(arr3.length==0)
+          { elem.style.display="none";
+            celem.style.display=null;
+            end= new Date();
+             endTime = new Date();
+            var timeDiff = endTime - start; //in ms
+  // strip the ms
+            timeDiff /= 1000;
+  
+  // get seconds 
+           var seconds = Math.round(timeDiff);
+          
+           var t=document.querySelector("#record");
+           var e=document.querySelector("#record1");
+           
+          var changed=localStorage.getItem(bestscore)
+          changed=changed?changed.split(','):[];
+          changed.push(seconds);
+          localStorage.setItem(bestscore,changed.toString());
+          
+          changed.sort(function(a,b){
+            return (a-b)
+          });
+           f.textContent="The Best Score is :";
+
+           if(changed.length<5)
+           {
+            for(var i=0;i<changed.length;i++)
+            {
+              
+               li[i]=document.createElement("li");
+              ul.appendChild(li[i]);
+              li[i].textContent=changed[i];
+            }
+           }
+           else
+           {
+            for(var i=0;i<5;i++)
+            {
+               li2[i]=document.createElement("li");
+              ul.appendChild(li2[i]);
+              li2[i].textContent=changed[i];
+              
+            }
+
+           }
+
+      
+           t.textContent="Your Time is "+ seconds +"  seconds"
+           
+           if(seconds<=30)
+           {
+            e.textContent="Excellent";}
+            else if(seconds<=60 && seconds>30)
+            {
+              e.textContent=" VeryGood";
+            }
+            else if(seconds<=80 && seconds>60)
+            {
+              e.textContent="Good";
+            }
+            else if(seconds<=90&&seconds>80)
+            {
+              e.textContent="Not Bad";
+            }
+
+            else if(seconds<=100&&seconds>90)
+            {
+              e.textContent="Can do better";
+            }
+            else
+            {
+              e.textContent="Try again";
+            }
+
+
+            
+
+            
+         }
+          }
+          else
+          {
+            audio.play();
+          }
+          
+          
+ 
+
+
+      
+      
+console.log(celem);
+    }
+    function esquare()
+    {
+      hard.disabled=true;
+      easy.disabled=true;
+      
+  button.style.border="10px solid black";
+  button.style.color="black";
+  button.style.padding="15px 32px";
+  button.style.textAlign="center";
+  button.style.fontFamily="'Dancing Script', cursive";
+  button.style.fontSize="16px";
+  button.style.backgroundImage="url('http://getwallpapers.com/wallpaper/full/4/5/4/397057.jpg')";
+
+      button.textContent="CLICK HERE TO START";
+    square(4,4);
+  }
+  function hsquare()
+
+  { hard.disabled=true;
+    easy.disabled=true;
+     button.style.border="10px solid black";
+  button.style.color="black";
+  button.style.padding="15px 32px";
+  button.style.textAlign="center";
+  button.style.fontFamily="'Dancing Script', cursive";
+  button.style.fontSize="16px";
+  button.style.backgroundImage="url('http://getwallpapers.com/wallpaper/full/4/5/4/397057.jpg')";
+
+    button.textContent="CLICK HERE TO START";
+    elem.style.gridTemplateRows=".1fr .1fr .1fr .1fr .1fr";
+    square(5,4);
+  }
+  </script>
+   
