@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+</head>
+<style>
+	html,body{
+		width:100%;
+		height:100%;
+		margin:0px;
+		display:block;
+
+	}
+</style>
+<body >
+	<canvas id="canvas"></canvas>
+
+</body>
+</html>
+<script>
+	var gravity=1;
+	var i=1;
+	var canvas=document.querySelector("canvas");
+	var ctx=canvas.getContext('2d');
+	canvas.width=window.innerWidth;
+	canvas.height=window.innerHeight;
+	var cx=canvas.width/2;
+	var cy=canvas.height/2;
+	var colors=[
+		"blue",
+		'#40A820',
+		"blue",
+		"blue",
+		'#FF00E2'
+
+	]
+	class rcircle{
+		constructor(x,y,r,sa,enda)
+		{
+			this.x=x;
+			this.y=y;
+			this.r=r;
+			this.sa=sa;
+			this.enda=enda;
+			this.color=colors[Math.floor((Math.random()*4)+1)];
+			
+		}
+		draw()
+		{
+			ctx.beginPath()
+			ctx.arc(this.x,this.y,this.r,(Math.PI/180)*this.sa,(Math.PI/180)*this.enda,false)
+			ctx.strokeStyle=this.color;
+			ctx.lineWidth="10";
+			ctx.stroke();
+		}
+	}
+	
+	function newcircle()
+	{
+		this.x=canvas.width/2;
+		this.y=canvas.height/2;
+		this.dx=1;
+		this.dy=1;
+		this.g=30;
+		this.r=10;
+		this.color="blue";
+		this.draw=function()
+		{ctx.beginPath();
+			ctx.fillStyle="blue";
+	       ctx.arc(this.x,this.y+100,this.r,0,2*Math.PI,false);
+	         ctx.fill();
+
+		};
+		this.movup=function()
+		{
+			this.y-=this.g;
+
+
+
+		};
+	}
+		circle= new newcircle();
+		function check(c)
+		{
+			var dx=Math.abs(circle.x-(canvas.width/2));
+			var dy=Math.abs(circle.y-(cy));
+			var distance=Math.sqrt(dx*dx+dy*dy);
+			
+			
+			if(distance==60)
+			{
+				if(circle.color==c
+					)
+				{
+					circle.y-=circle.g;
+				}
+				else
+				{
+					circle.r=0;
+				}
+
+			}
+		}
+			
+
+		
+		
+		 r1=new rcircle(cx,cy,50,0,180);
+		 r2=new rcircle(cx,cy,50,180,360);
+		 
+
+
+		
+ function rotate(){
+ 	 window.requestAnimationFrame(rotate);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.save();
+  
+ 
+ 
+	
+	ctx.beginPath();
+  circle.draw();
+
+	circle.y+=circle.dy;
+ 
+  ctx.translate(canvas.width/2,cy);
+  ctx.rotate((Math.PI/180)*i);
+  i=i+1;
+  ctx.translate(-canvas.width/2,-cy);
+
+ 
+   
+ 
+  r1.draw();
+  check(r1.color);
+  r2.draw();
+  check(r2.color);
+   ctx.restore();
+   
+ }
+rotate();
+ window.addEventListener("touchstart",move);
+function move(e)
+{
+	circle.movup();
+}
+
+
+
+</script>
