@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+</head>
+<style>
+	html,body,audio{
+		background-color:rgba(0,0,0,0.5);
+		width:100%;
+		height:100%;
+		margin:0px;
+		display:block;
+
+	}
+	.score,.s
+	{
+		
+   color: white;
+   font-size: 200%;
+   font-family:cursive;
+   
+	}
+</style>
+<body >
+	<audio class='ast'><source src="C:\Program Files\Sublime Text 3\ss.mp3" type="audio/mpeg"></audio>
+	<audio class='bst'><source src="C:\Program Files\Sublime Text 3\ndn.mp3" type="audio/mpeg"></audio>
+  <p class="score"></p>
+  <ul class="s"></ul>
+	
+	<canvas id="canvas"></canvas>
+
+</body>
+</html>
+<script>
+	var f=document.querySelector(".score");
+	var ul=document.querySelector(".s");
+	var score=20;
+	var e=0;
+    var audio1=document.querySelector(".ast");
+    var audio2=document.querySelector(".bst");
+	var gravity=1;
+	var i=0;
+	var changed;
+	var bestscore=new Array();
+	var li=[];
+	var li2=[];
+	var canvas=document.querySelector("canvas");
+	var ctx=canvas.getContext('2d');
+	canvas.width=window.innerWidth;
+	canvas.height=window.innerHeight;
+	var cx=canvas.width/2;
+	var cy=canvas.height/2;
+	var colors=[
+		"#6748D9",
+		"#8C7ACB",
+		"#529AD9",
+		"#5DD9B4",
+		"#438C77"
+
+	]
+	
+	class rcircle{
+		constructor(x,y,r,sa,enda)
+		{   this.i=0;
+			this.x=x;
+			this.y=y;
+			this.r=r;
+			this.sa=sa;
+			this.enda=enda;
+			this.color=colors[Math.floor((Math.random()*4)+1)];	
+			this.lw=10;
+		}
+		draw()
+		{
+			ctx.beginPath()
+			ctx.arc(this.x,this.y,this.r,(Math.PI/180)*this.sa,(Math.PI/180)*this.enda,false)
+			ctx.strokeStyle=this.color;
+			ctx.lineWidth="10";
+			ctx.stroke();
+			
+		}
+	}
+	
+	
+	function newcircle()
+	{   this.count=0;
+		this.x=canvas.width/2;
+		this.y=(canvas.height/2)+100;
+		this.dx=1;
+		this.dy=1;
+		this.g=30;
+		this.r=7.5;
+		this.color="#529AD9";
+		this.draw=function()
+		{ctx.beginPath();
+			ctx.fillStyle="#529AD9";
+	       ctx.arc(this.x,this.y,this.r,0,2*Math.PI,false);
+	         ctx.fill();
+             this.count+=1;
+
+		};
+		this.movup=function()
+		{
+			this.y-=this.g;
+
+
+
+		};
+	}
+		circle= new newcircle();
+		function distance(x1,x2,y1,y2)
+		{ var dx=Math.abs(x1-x2);
+			var dy=Math.abs(y1-y2);
+			var distance=Math.sqrt(dx*dx+dy*dy);
+			return distance;
+
+		}
+
+	function scores(x)
+	{
+       circle.r=0;
+		r1.r=0;
+		r2.r=0;
+		
+		score=score*x;
+					
+	  ctx.clearRect(0,0,canvas.width,canvas.height);
+	
+		 changed=localStorage.getItem(bestscore)
+          changed=changed?changed.split(','):[];
+          changed.push(score);
+          localStorage.setItem(bestscore,changed.toString());
+          
+          
+          changed.sort(function(a,b){
+            return (b-a);
+          });
+           f.textContent="The Best Score is :";
+
+           if(changed.length<5)
+           {
+            for(var i=0;i<changed.length;i++)
+            {
+              
+               li[i]=document.createElement("li");
+              ul.appendChild(li[i]);
+              li[i].textContent=changed[i];
+            }
+           }
+           else
+           {
+            for(var i=0;i<5;i++)
+            {
+               li2[i]=document.createElement("li");
+              ul.appendChild(li2[i]);
+              li2[i].textContent=changed[i];
+              
+            }
+
+           }
+
+	}
+		 r1=new rcircle(cx,cy,70,90,270);
+		 r2=new rcircle(cx,cy,70,270,450);
+		  
+        var t1=new Date();
+        var t2,tr,k,t3,tc;
+var r=0;
+
+		
+ function rotate(){
+ 
+ 	
+
+ 	 window.requestAnimationFrame(rotate);
+
+ 	 audio1.play();
+ 	
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.save();
+
+ 
+	
+	ctx.beginPath();
+ 	circle.draw();
+ 	
+
+
+	circle.y+=circle.dy;
+  
+ 
+  ctx.translate(canvas.width/2,cy);
+ 
+  
+
+         ctx.fill();
+  ctx.rotate((Math.PI/180)*i);
+  i+=1;
+ if(i==45)
+ {	
+   if(r==0)
+   {
+   	t2=new Date();
+   	tr=t2-t1;
+   	tr/=250;
+   	
+    
+
+   	r=r+1;
+   }
+   console.log(tr);
+}
+ ctx.translate(-canvas.width/2,-cy);  
+  if((r1.color!="#529AD9"&& r2.color=="#529AD9")||((r1.color=="#529AD9"&& r2.color!="#529AD9")))
+  {
+  	r1.draw();
+  	r2.draw();
+  }
+  else
+  {
+  
+  	 r1=new rcircle(cx,cy,70,90,270);
+	 r2=new rcircle(cx,cy,70,270,450);
+
+}
+	var d1=distance(r1.x,circle.x,r1.y,circle.y);
+
+   if(i>45)
+   
+   
+  if(circle.y>=(r1.y))
+	{
+		if((d1<=(r1.r+circle.r)))
+		{
+			if(d1>=r1.r-r1.lw)
+			{
+			t3=new Date();
+			tc=t3-t1;
+			tc/=1000;
+			console.log(tc);
+			k=Math.floor(tc/tr);
+			console.log(k);
+			if(k%2==0)
+			{
+				if(circle.color!=r2.color)
+					{audio2.play();
+					circle.r=0;
+					scores(e);
+				}
+			}
+			else
+			{
+				if(circle.color!=r1.color)
+				{audio2.play();
+					circle.r=0;
+					scores(e);
+				}
+				
+			}
+		}
+
+
+		}
+	}
+
+	else
+	{
+		if(d1<=(r1.r+circle.r))
+		{
+			if(d1>=r1.r-r1.lw)
+			{
+			t3=new Date();
+			tc=t3-t1;
+			tc/=1000;
+			k=Math.floor(tc/tr);
+			if(k%2!=0)
+			{
+				if(circle.color!=r2.color)
+				{audio2.play();
+					circle.r=0;
+					scores(e);
+				}
+				
+			}
+			else
+			{
+				if(circle.color!=r1.color)
+				{
+					audio2.play();
+					circle.r=0;
+					scores(e);
+				}
+			
+					
+			}
+		}
+
+		}
+	}
+
+   if(circle.y<=0)
+   {
+   	
+     
+    e=e+1;
+   	window.cancelAnimationFrame(rotate);
+
+   	
+   
+ r1=new rcircle(cx,cy,70,90,270);
+	 r2=new rcircle(cx,cy,70,270,450);
+	 
+   	circle.y=2*cy-10;
+
+   }
+   
+ 
+
+   ctx.restore();
+   
+ }
+ var t1=new Date();
+rotate();
+ window.addEventListener("touchstart",move);
+function move(event)
+{
+	circle.movup();
+}
+
+
+
+</script>
